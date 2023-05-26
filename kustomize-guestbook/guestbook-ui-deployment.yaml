@@ -20,4 +20,4 @@ spec:
         - containerPort: 80
       - image: debian:10-slim
         name: sleeper
-        command: ["bash", "-c", "echo Bonjour formation; sleep infinity"]
+        command: ["bash", "-c", "echo Bonjour training; sleep infinity"]
