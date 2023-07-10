@@ -1,0 +1,11 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
+metadata:
+  name: traefik-service
+spec:
+  weighted:
+    services:
+      - name: stable-{{ template "helm-guestbook.fullname" . }} # k8s service name that you need to create for stable application version
+        port: 80
+      - name: canary-{{ template "helm-guestbook.fullname" . }} # k8s service name that you need to create for new application version
+        port: 80
