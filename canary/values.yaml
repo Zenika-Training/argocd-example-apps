@@ -14,17 +14,8 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  path: /
-  hosts:
-    - chart-example.local
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  enabled: true
+  host: guestbook.34.88.96.185.nip.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
