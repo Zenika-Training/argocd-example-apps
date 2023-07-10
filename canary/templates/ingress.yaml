@@ -13,7 +13,7 @@ spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`{{ .Values.host }}`)
+  - match: Host(`{{ .Values.ingress.host }}`)
     kind: Rule
     services:
     - name: traefik-service
