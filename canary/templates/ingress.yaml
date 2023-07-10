@@ -1,0 +1,22 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: guestbook-ingress
+  labels:
+    app: {{ template "helm-guestbook.name" . }}
+    chart: {{ template "helm-guestbook.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`{{ .Values.host }}`)
+    kind: Rule
+    services:
+    - name: traefik-service
+      namespace: {{ .Release.Namespace }}
+      kind: TraefikService
+{{- end }}
