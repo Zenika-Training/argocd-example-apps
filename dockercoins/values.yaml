@@ -14,6 +14,7 @@ image:
     repository: training/dockercoins-rng
   hasher:
     repository: training/dockercoins-hasher
+    version: "none"
   worker:
     repository: training/dockercoins-worker
   webui:
