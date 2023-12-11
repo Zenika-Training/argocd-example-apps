@@ -37,7 +37,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /not-found
+              path: /
               port: http
           readinessProbe:
             httpGet:
