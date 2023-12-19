@@ -1,6 +1,6 @@
 {{- if .Values.ingress.enabled }}
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: guestbook-ingress
   labels:
@@ -8,15 +8,16 @@ metadata:
     chart: {{ template "helm-guestbook.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-
 spec:
-  entryPoints:
-    - web
-  routes:
-  - match: Host(`{{ .Values.ingress.host }}`)
-    kind: Rule
-    services:
-    - name: traefik-service
-      namespace: {{ .Release.Namespace }}
-      kind: TraefikService
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: stable-{{ template "helm-guestbook.fullname" . }}
+                port:
+                    number: 80
 {{- end }}
