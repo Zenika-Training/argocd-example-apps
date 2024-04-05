@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: canary-demo-preview.15.237.27.42.sslip.io
+  - host: canary-demo-preview.35.180.228.207.sslip.io
     http:
       paths:
       - path: /
