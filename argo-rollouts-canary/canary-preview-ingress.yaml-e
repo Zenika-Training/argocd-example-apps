@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: canary-demo
+  name: canary-demo-preview
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
 spec:
   ingressClassName: nginx
   rules:
-  - host: canary-demo.13.38.1.197.sslip.io
+  - host: canary-demo-preview.15.236.158.124.sslip.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: canary-demo
+            name: canary-demo-preview
             port:
               name: http
