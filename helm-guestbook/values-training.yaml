@@ -1,0 +1,4 @@
+ingress:
+  enabled: true
+  hosts:
+    - guestbook.52.47.196.165.sslip.io
