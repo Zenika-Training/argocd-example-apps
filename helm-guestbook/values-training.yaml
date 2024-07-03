@@ -3,3 +3,6 @@ ingress:
   hosts:
     - guestbook.52.47.196.165.sslip.io
 replicaCount: 5
+image:
+  repository: gcr.io/heptio-images/ks-guestbook-demo
+  tag: 0.2
