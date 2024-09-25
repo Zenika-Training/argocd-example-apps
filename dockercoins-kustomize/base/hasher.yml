@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hasher
+  labels:
+    component: hasher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: hasher
+  template:
+    metadata:
+      labels:
+        component: hasher
+    spec:
+      containers:
+        - name: hasher
+          image: training/dockercoins-hasher:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hasher
+  labels:
+    component: hasher
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    component: hasher

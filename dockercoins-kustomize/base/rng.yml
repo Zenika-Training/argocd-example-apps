@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rng
+  labels:
+    component: rng
+spec:
+  selector:
+    matchLabels:
+      component: rng
+  template:
+    metadata:
+      labels:
+        component: rng
+    spec:
+      containers:
+        - name: rng
+          image: training/dockercoins-rng:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rng
+  labels:
+    component: rng
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    component: rng

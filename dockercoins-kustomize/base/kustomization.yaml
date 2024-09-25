@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kustomize-dockercoins
+
+commonLabels:
+  app.kubernetes.io/name: dockercoins
+  app.kubernetes.io/managed-by: kustomize
+
+resources:
+  - rng.yml
+  - worker.yml
+  - hasher.yml
+  - webui.yml
+  - redis.yml
+
+patches:
+  - target:
+      kind: Ingress
+      name: webui
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: dockercoins.FIXME.sslip.io
