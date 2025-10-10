@@ -6,7 +6,7 @@ spec:
   replicas: 1
   revisionHistoryLimit: 1
   selector:
-    matchLals:
+    matchLabels:
       app: guestbook-ui
   template:
     metadata:
