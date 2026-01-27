@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: gcr.io/google-samples/gb-frontend
-  tag: v5
+  repository: zenika/k8s-training-deploy
+  tag: v1
   pullPolicy: IfNotPresent
 
 service:
