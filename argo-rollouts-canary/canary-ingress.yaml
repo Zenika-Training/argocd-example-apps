@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: canary-demo
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
 spec:
   ingressClassName: nginx
@@ -17,3 +18,7 @@ spec:
             name: canary-demo
             port:
               name: http
+  tls:
+    - hosts:
+      - canary-demo.${TOP_LEVEL_DOMAIN}
+      secretName: cert-canarydemo
