@@ -3,6 +3,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "helm-guestbook.fullname" . }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   labels:
     app: {{ template "helm-guestbook.name" . }}
     chart: {{ template "helm-guestbook.chart" . }}
@@ -21,4 +25,8 @@ spec:
                 name: {{ template "helm-guestbook.fullname" . }}
                 port:
                     number: {{ .Values.service.port }}
+  tls:
+    - hosts:
+      - {{ index .Values.ingress.hosts 0 }}
+      secretName: {{ .Values.ingress.certificateSecretName }}
 {{- end }}
